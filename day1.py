@@ -21,8 +21,12 @@ def sanitize(filename):
   return [e for e in elves if e]
 
 
-def transform(sanitized):
+def transform_part_one(sanitized):
   return max(sum(s) for s in sanitized)
+
+
+def transform_part_two(sanitized):
+  return sum(sorted(sum(s) for s in sanitized)[-3:])
 
 
 class Day1(unittest.TestCase):
@@ -35,14 +39,24 @@ class Day1(unittest.TestCase):
         [[1000, 2000, 3000], [4000], [5000, 6000], [7000, 8000, 9000], [10000]])
 
   def test_transform(self):
-    solution = transform(sanitize(SIMPLE_INPUT))
+    solution = transform_part_one(sanitize(SIMPLE_INPUT))
 
     self.assertEqual(solution, 24000)
 
   def test_real(self):
-    solution = transform(sanitize(REAL_INPUT))
+    solution = transform_part_one(sanitize(REAL_INPUT))
 
     self.assertEqual(solution, 71300)
+
+  def test_transform_two(self):
+    solution = transform_part_two(sanitize(SIMPLE_INPUT))
+
+    self.assertEqual(solution, 45000)
+
+  def test_real_two(self):
+    solution = transform_part_two(sanitize(REAL_INPUT))
+
+    self.assertEqual(solution, 209691)
 
 
 if __name__ == '__main__':
